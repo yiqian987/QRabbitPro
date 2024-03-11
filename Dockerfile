@@ -1,6 +1,7 @@
 FROM python:3.9-slim-buster
 
-RUN apt update \
+RUN sed -i 's#http://deb.debian.org#https://mirrors.ustc.edu.cn#g' /etc/apt/sources.list \
+    &&apt update \
     && apt-get install -yq --no-install-recommends \
     sudo \
     python3-dev \
@@ -9,7 +10,7 @@ RUN apt update \
     git \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone \
-    && git clone https://github.com/HT944/QRabbitPro.git /Rabbit \
+    && git clone https://github.com/yiqian987/QRabbitPro.git /Rabbit \
     && cd /Rabbit \
     && pip3 install --no-cache-dir -r requirements.txt \
     && rm -rf /var/lib/apt/lists/*
